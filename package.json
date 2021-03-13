@@ -1,0 +1,24 @@
+{
+  "name": "full-nodejs",
+  "version": "1.0.0",
+  "description": "Complete NodeJS guide ",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start-server": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/themethoft/full-nodejs.git"
+  },
+  "author": "Saswata Banerjee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/themethoft/full-nodejs/issues"
+  },
+  "homepage": "https://github.com/themethoft/full-nodejs#readme"
+}
