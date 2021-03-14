@@ -10,15 +10,13 @@ const shopRoutes = require('./routes/shop');
 
 //app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.urlencoded({extended:false}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use(bodyParser.json());
 
 app.use('/admin',adminRoutes);
 app.use(shopRoutes);
 
-app.get('/favicon.ico', (req, res) => {
-    res.sendFile(path.join(__dirname, '.', 'favicon.ico'));
-})
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
 })
