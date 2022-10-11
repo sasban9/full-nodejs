@@ -4,4 +4,7 @@
 <body>
     <%- include('includes/navigation') %>
     <h1>Page Not Found!</h1>
-<%- include('includes/end') %>
+    <p>You wandered to path: <%= path %></p>
+    <p>Go back to <a href="/" class="btn btn-dark">HOME</a></p>
+
+    <%- include('includes/end') %>
