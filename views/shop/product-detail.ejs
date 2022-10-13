@@ -6,7 +6,7 @@
         <%- include('../includes/navigation.ejs') %>
         <article class="card product-item centered" style="margin: 1rem auto;padding:1rem">
             <h1><%= product.title %></h1>
-            <div style="overflow: hidden;text-align: center;">
+            <div class="image">
                 <img src="<%= product.imageUrl %>" alt="<%= product.title %>" class="img-sm">
             </div>
             <h2><%= product.price %></h2>

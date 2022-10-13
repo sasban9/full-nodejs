@@ -23,8 +23,9 @@ form {
   text-align: center;
 }
 
-.img-sm {
-  max-height: 480px;
+.image img{
+  max-width: 100%;
+  max-height: 20rem;
 }
 
 .main-header {
