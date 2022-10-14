@@ -1,5 +1,18 @@
 const Product = require('../models/product');
 
+exports.getProducts = (req, res, next) => {
+  Product.fetchAll()
+  .then(products => {
+    res.render("admin/products", {
+      prods: products,
+      pageTitle: "Admin Productss",
+      path: '/admin/products',
+      editing: false
+    });
+  })
+  .catch(err => console.log(err));
+};
+
 exports.getAddProduct = (req, res, next) => {
     //res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
     res.render("admin/edit-product", {
@@ -64,20 +77,6 @@ exports.postAddProduct = (req, res, next) => {
 //   .then(result => {
 //     console.log('UPDATED PRODUCT!');
 //     res.redirect('/admin/products');
-//   })
-//   .catch(err => console.log(err));
-// };
-
-// exports.getProducts = (req, res, next) => {
-//   req.user
-//   .getProducts()
-//   .then(products => {
-//     res.render("admin/products", {
-//       prods: products,
-//       pageTitle: "Admin Productss",
-//       path: '/admin/products',
-//       editing: false
-//     });
 //   })
 //   .catch(err => console.log(err));
 // };
