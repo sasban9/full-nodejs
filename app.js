@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 
 app.use(errorController.get404);
 
-mongoConnect(client => {
-  console.log(client);
+mongoConnect(() => {
+  // console.log(client);
   app.listen(3000);
 });
