@@ -1,7 +1,7 @@
-const mongodb = require('mongodb');
+// const mongodb = require('mongodb');
 const Product = require('../models/product');
 
-const ObjectId = mongodb.ObjectId;
+// const ObjectId = mongodb.ObjectId;
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll()
@@ -76,7 +76,7 @@ exports.postEditProduct = (req, res, next) => {
     updatedPrice,
     updatedDesc,
     updatedImageUrl,
-    new ObjectId(prodId)
+    prodId
   );
   product
     .save()
@@ -89,11 +89,8 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.findByPk(prodId)
-    .then(product => {
-      return product.destroy();
-    })
-    .then((result) => {
+  Product.deleteById(prodId)
+    .then(() => {
       console.log("DESTROYED PRODUCT!");
       res.redirect("/admin/products");
     })
