@@ -59,10 +59,13 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
-  req.user()
-    .getCart()
-    .then()
-    .catch(err => console.log(err));
+  Product.findByPk(prodId).then(product => {
+    return req.user.addToCart(product);
+  }).then(result => console.log(result));
+  // req.user()
+  //   .getCart()
+  //   .then()
+  //   .catch(err => console.log(err));
   // Product.findByPk(prodId, product => {
   //   Cart.addProduct(prodId, product.price)
   // })
