@@ -177,7 +177,7 @@ form {
 }
 
 .card__image img {
-  max-width: 100%;
+  height: 24rem;
   margin: 0 -50%;
 }
 
