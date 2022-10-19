@@ -10,12 +10,20 @@ exports.getLogin = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
-  //   res.setHeader("Set-Cookie", "loggedIn=true");
-  User.findById("634ef2f1e1db969f520e401d")
-    .then((user) => {
-      req.session.isLoggedIn = true;
-      req.session.user = user;
-      res.redirect("/");
-    })
-    .catch((err) => console.log(err));
-};
+    //   res.setHeader("Set-Cookie", "loggedIn=true");
+    User.findById("634ef2f1e1db969f520e401d")
+      .then((user) => {
+        req.session.isLoggedIn = true;
+        req.session.user = user;
+        res.redirect("/");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  exports.postLogout = (req, res, next) => {
+    req.session.destroy(err => {
+        res.redirect('/');
+        console.log(err);
+    });
+  };
+    
