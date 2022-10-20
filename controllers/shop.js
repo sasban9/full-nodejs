@@ -46,9 +46,7 @@ exports.getIndex = (req, res, next) => {
       res.render('shop/index', {
         prods: products,
         pageTitle: 'Shop',
-        path: '/',
-        isAuthenticated: req.session.isLoggedIn,
-        csrfToken: req.csrfToken()
+        path: '/'
       });
     })
     .catch(err => {
@@ -102,15 +100,15 @@ exports.postOrder = (req, res, next) => {
       });
       const order = new Order({
         user: {
-          name: req.user.name,
-          userId: req.session.user,
+          email: req.user.email,
+          userId: req.user,
         },
         products: products,
       });
       return order.save();
     })
     .then((result) => {
-      return res.session.user.clearCart();
+      return req.user.clearCart();
     })
     .then(() => {
       res.redirect("/orders");
