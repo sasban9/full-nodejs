@@ -1,12 +1,13 @@
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
+require('dotenv').config();
 
 const User = require('../models/user');
 
 const transporter = nodemailer.createTransport(sendgridTransport({
   auth: {
-    api_key: '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'
+    api_key: process.env.SENDGRID_API_TOKEN
   }
 }));
 
@@ -92,6 +93,10 @@ exports.postLogin = (req, res, next) => {
           })
           .then((result) => {
             res.redirect("/login");
+            
+            if (!process.env.RANDOMER_API_TOKEN) {
+              throw new Error("You forgot to set RANDOMER_API_TOKEN");
+            }
             return transporter.sendMail({
               to: email,
               from: 'saswata@styched.in',
