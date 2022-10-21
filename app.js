@@ -66,6 +66,7 @@ app.use(shopRoutes);
 app.use(authRoutes);
 
 app.use(errorController.get404);
+// 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
 
 mongoose
   .connect(MONGODB_URI)
