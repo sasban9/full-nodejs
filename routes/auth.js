@@ -1,16 +1,25 @@
-const express = require('express');
-const { body, validationResult } = require('express-validator');
+const express = require("express");
+const { body, validationResult } = require("express-validator");
 
-const authController = require('../controllers/auth');
+const authController = require("../controllers/auth");
 
 const router = express.Router();
 
-router.get('/login', authController.getLogin);
-router.get('/signup', authController.getSignup);
-router.get('/reset', authController.getReset);
-router.get('/reset/:token', authController.getNewPassword);
+router.get("/login", authController.getLogin);
+router.get("/signup", authController.getSignup);
+router.get("/reset", authController.getReset);
+router.get("/reset/:token", authController.getNewPassword);
 
-router.post('/login', authController.postLogin);
+router.post(
+  "/login",
+  [
+    body("email").isEmail().withMessage("Please enter a valid email"),
+    body("password", "Password has to be valid.")
+      .isLength({ min: 5 })
+      .isAlphanumeric(),
+  ],
+  authController.postLogin
+);
 router.post(
   "/signup",
   [
@@ -22,10 +31,9 @@ router.post(
         //   throw new Error("This email address is forbidden.");
         // }
         // return true;
-        User.findOne({ email: value })
-        .then((userDoc) => {
+        User.findOne({ email: value }).then((userDoc) => {
           if (userDoc) {
-            Promise.reject('Email exists, please pick a different one.');
+            Promise.reject("Email exists, please pick a different one.");
           }
         });
       }),
@@ -44,8 +52,8 @@ router.post(
   ],
   authController.postSignup
 );
-router.post('/logout', authController.postLogout);
-router.post('/reset', authController.postReset);
-router.post('/new-password', authController.postNewPassword);
+router.post("/logout", authController.postLogout);
+router.post("/reset", authController.postReset);
+router.post("/new-password", authController.postNewPassword);
 
 module.exports = router;
