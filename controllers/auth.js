@@ -85,7 +85,7 @@ exports.postLogin = (req, res, next) => {
       .render("auth/signup", {
         path: "/signup",
         pageTitle: "Register",
-        errorMessage: errors.array()
+        errorMessage: errors.array()[0].msg
       });
     }
 
