@@ -28,8 +28,8 @@ exports.getLogin = (req, res, next) => {
     pageTitle: "Login",
     errorMessage: message,
     oldInput: {
-      email: req.body.email
-    }
+      email: req.body.email,
+    },
   });
 };
 
@@ -44,6 +44,10 @@ exports.getSignup = (req, res, next) => {
     path: "/signup",
     pageTitle: "Register",
     errorMessage: message,
+    oldInput: {
+      email: "",
+    },
+    validationErrors: [],
   });
 };
 
@@ -91,7 +95,7 @@ exports.postLogin = (req, res, next) => {
 exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  const confirmPassword = req.body.confirmPassword;
+  // const confirmPassword = req.body.confirmPassword;
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -103,6 +107,7 @@ exports.postSignup = (req, res, next) => {
       oldInput: {
         email: email,
       },
+      validationErrors: errors.array(),
     });
   }
 
