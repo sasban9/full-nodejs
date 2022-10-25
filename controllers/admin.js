@@ -72,7 +72,7 @@ exports.getEditProduct = (req, res, next) => {
   const prodId = req.params.productId;
   Product.findById(prodId)
     .then(product => {
-      throw new Error('Dummy');
+      // throw new Error('Dummy');
       if (!product) {
         return res.redirect('/');
       }
