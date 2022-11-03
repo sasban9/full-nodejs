@@ -27,12 +27,18 @@ const fileStorage = multer.diskStorage({
     cb(null, "media");
   },
   filename: (req, file, cb) => {
-    cb(null, new Date().toISOString() + "-" + file.originalname);
+    const dateString = new Date().toISOString().replace(/:/g, '-');
+    const uniqueName = dateString + '-' + Math.round(Math.random() * 1E9) + "-" + file.originalname;
+    cb(null, uniqueName);
   },
 });
 
-const fileFilter = (req, file, cb) => {
-  if(file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
+const multerFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  ) {
     cb(null, true);
   } else {
     cb(null, false);
@@ -47,12 +53,13 @@ const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single("image"));
+app.use(multer({ storage: fileStorage, fileFilter: multerFilter }).single('image'));
+// app.use(multer({ dest: 'media' }).single("image"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/media', express.static(path.join(__dirname, "media")));
 app.use(
   session({
-    secret: "my secret",
+    secret: process.env.MY_SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,
