@@ -105,3 +105,4 @@ dist
 *.zip
 
 media/
+data/invoices/
