@@ -24,7 +24,7 @@ form {
 }
 
 .image {
-  height: 20rem;
+  height: 36rem;
 }
 
 .image img {
@@ -165,7 +165,7 @@ form {
 .grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   align-items: stretch;
 }
 
