@@ -87,3 +87,7 @@
         <% } %>
     </ul>
 </nav>
+
+<% if(locals.user) { %>
+<div class="ticker">Hello, <%= user %>!</div>
+<% } %>
