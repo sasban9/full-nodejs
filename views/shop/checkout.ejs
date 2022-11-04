@@ -5,6 +5,9 @@
     <body>
         <%- include('../includes/navigation.ejs') %>
         <main>
+            <div class="centered">
+                <h3 style="background:#000;color:#fff">CHECKOUT</h3>
+            </div>
             <ul class="cart__item-list">
                 <% products.forEach(p => { %>
                     <li class="cart__item">
@@ -14,7 +17,20 @@
                 <% }) %>
             </ul>
             <div class="centered">
-                <h2>Total: <%= totalSum %></h2>
+                <h2>Total: <%= totalSum.toLocaleString('en-IN', { style: 'currency', currency: 'INR' }) %></h2>
+            </div>
+            <div>
+                <button class="btn" id="order-btn">ORDER</button>
+                <script src="https://js.stripe.com/v3/"></script>
+                <script>
+                    var stripe = Stripe('pk_test_51M0MF3SHVFfzzt0xUikm4OtLPMl74YJ7bqLQFybgLcp9daSRLt7sckwbVYu1DThbniTEAIUvMcWvQWhZWRrZEV5n00BSFAWiKz');
+                    var orderBtn = document.getElementById('order-btn');
+                    orderBtn.addEventListener('click', function() {
+                        stripe.redirectToCheckout({
+                            sessionId: '<%= sessionId %>'
+                        });
+                    });
+                </script>
             </div>
         </main>
         <%- include('../includes/end.ejs') %>
